@@ -85,6 +85,8 @@ describe("mx.Event", function() {
             const e = event.trigger(args);
             should(results).eql([1, 2, 1, 2]);
             should(e).containEql({
+                a: 1,
+                b: 2,
                 source,
                 args,
                 type: "click",

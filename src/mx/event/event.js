@@ -34,16 +34,16 @@ export default class Event
 
     trigger(args = {})
     {
-        const e = {
+        const e = jQuery.extend({}, args, {
             type: this.type,
             source: this._source,
-            args,
             defaultPrevented: false,
             preventDefault: function()
             {
                 this.defaultPrevented = true;
             }
-        };
+        });
+        e.args = args;
         this.listeners.forEach(listener => {
             listener(e);
         });

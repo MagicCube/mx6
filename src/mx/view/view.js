@@ -102,7 +102,7 @@ export default class View extends Component
         {
             if (this._frame)
             {
-                $.extend(this._frame, frame);
+                jQuery.extend(this._frame, frame);
             }
         }
 

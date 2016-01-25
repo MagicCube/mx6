@@ -88,6 +88,8 @@ describe("mx.EventProvider", function() {
             let e = eventProvider.trigger("test", args);
             should(results).eql([1, 2, 3]);
             should(e).containEql({
+                a: 1,
+                b: 2,
                 source: eventProvider,
                 args,
                 type: "test",

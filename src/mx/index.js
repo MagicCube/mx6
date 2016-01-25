@@ -5,7 +5,9 @@ const mx = {
     View: require("./view/view"),
     ViewContainer: require("./view/view-container"),
     Scene: require("./scn/scene"),
-    Application: require("./app/application")
+    Application: require("./app/application"),
+
+    Route: require("./route/route")
 };
 
 export default mx;
