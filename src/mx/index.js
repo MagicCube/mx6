@@ -1,7 +1,9 @@
 import Event from "./event/event";
+import EventProvider from "./event/event-provider";
 
 const mx = {
-    Event
+    Event,
+    EventProvider
 };
 
 export default mx;

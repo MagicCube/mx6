@@ -5,8 +5,15 @@ In 2016, MXFramework is back with whole new features, and all the codes are rewr
 
 ## Installations
 ```console
-npm install mx6
+$ npm install mx6
 ```
+
+## Tests
+```console
+$ npm test
+```
+
+
 ## Development Documents
 Please read [these documents](./doc/index.md).
 

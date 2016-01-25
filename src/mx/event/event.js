@@ -1,12 +1,17 @@
 export default class Event
 {
-    constructor(type)
+    constructor(type, source)
     {
         if (typeof(type) !== "string")
         {
             throw new Error("type must be a string.");
         }
+        if (!source)
+        {
+            throw new Error("source can not be null or empty.");
+        }
         this._type = type;
+        this._source = source;
     }
 
     _type = null;
@@ -15,21 +20,23 @@ export default class Event
         return this._type;
     }
 
+    _source = null;
+    get source()
+    {
+        return this._source;
+    }
+
     _listeners = [];
     get listeners()
     {
         return this._listeners;
     }
 
-    trigger(source, args = {})
+    trigger(args = {})
     {
-        if (!source)
-        {
-            throw new Error("source can not be null or empty.");
-        }
         const e = {
             type: this.type,
-            source,
+            source: this._source,
             args,
             defaultPrevented: false,
             preventDefault: function()

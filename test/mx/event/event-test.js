@@ -18,17 +18,17 @@ describe("mx.Event", function() {
 
     describe("#constructor()", function() {
         it("should throw exception when the type argument is not specified", function() {
-            should(() => { event = new mx.Event(); }).throw();
+            should(() => { event = new mx.Event(); }).throw("type must be a string.");
+        });
+
+        it("should throw exception when the type argument is not specified", function() {
+            should(() => { event = new mx.Event("click"); }).throw("source can not be null or empty.");
         });
 
         it("should construct correctly", function() {
-            event = new mx.Event("click");
-        });
-    });
-
-    describe("#type", function() {
-        it("should return correctly", function() {
+            event = new mx.Event("click", source);
             should(event.type).eql("click");
+            should(event.source).eql(source);
         });
     });
 
@@ -62,12 +62,8 @@ describe("mx.Event", function() {
     });
 
     describe("#trigger()", function() {
-        it("throw exception when source is not defined", function() {
-            should(() => { const e = event.trigger(); }).throw("source can not be null or empty.");
-        });
-
         it("should trigger without args in correct sequence and return correctly", function() {
-            const e = event.trigger(source);
+            const e = event.trigger();
             should(results).eql([1, 2]);
             should(e).containEql({
                 source,
@@ -79,7 +75,7 @@ describe("mx.Event", function() {
 
         it("should trigger with args in correct sequence and return correctly too", function() {
             const args = { a: 1, b: 2 };
-            const e = event.trigger(source, args);
+            const e = event.trigger(args);
             should(results).eql([1, 2, 1, 2]);
             should(e).containEql({
                 source,
@@ -99,11 +95,11 @@ describe("mx.Event", function() {
 
     describe("#preventDefault()", function() {
         it("should prevent default action correctly", function() {
-            const beforeSaveEvent = new mx.Event("beforesave");
+            const beforeSaveEvent = new mx.Event("beforesave", source);
             beforeSaveEvent.addListener(e => {
                 e.preventDefault();
             });
-            const ev = beforeSaveEvent.trigger(source);
+            const ev = beforeSaveEvent.trigger();
             should(ev.defaultPrevented).be.true();
         });
     });
