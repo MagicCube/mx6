@@ -106,7 +106,7 @@ export default class View extends Component
         }
         if (view instanceof View)
         {
-            return this.subviews.includes(view);
+            return this.subviews.indexOf(view) !== -1;
         }
         else
         {
@@ -136,7 +136,7 @@ export default class View extends Component
         }
 
         view._parent = this;
-        Array.prototype.add.apply(this.subviews, [ view ]);
+        Array.prototype.push.apply(this.subviews, [ view ]);
         if (view.id)
         {
             this.subviews[view.id] = view;
@@ -168,7 +168,13 @@ export default class View extends Component
         }
 
         view._parent = null;
-        Array.prototype.removeAt.apply(this.subviews, [ this.subviews.indexOf(view) ]);
+        const index = this.subviews.indexOf(view);
+        if (index === -1)
+        {
+            return false;
+        }
+        this.subviews.splice(index, 1);
+
         if (view.id)
         {
             this.subviews[view.id] = null;
@@ -176,6 +182,7 @@ export default class View extends Component
         }
 
         view.$element.detach();
+        return true;
     }
 
     removeFromParent()

@@ -33,10 +33,10 @@ export default class EventProvider
         {
             throw new Error("listener must be a function.");
         }
-        const e = this.getEvent(eventType);
-        if (e)
+        const event = this.getEvent(eventType);
+        if (event)
         {
-            e.addListener(listener);
+            event.addListener(listener);
         }
         else
         {
@@ -46,16 +46,16 @@ export default class EventProvider
 
     off(eventType, listener = null)
     {
-        const e = this.getEvent(eventType);
-        if (e)
+        const event = this.getEvent(eventType);
+        if (event)
         {
             if (listener !== null)
             {
-                e.removeListener(listener);
+                event.removeListener(listener);
             }
             else
             {
-                e.clearListeners();
+                event.clearListeners();
             }
         }
         else

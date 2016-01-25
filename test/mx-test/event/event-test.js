@@ -56,8 +56,15 @@ describe("mx.Event", function() {
 
     describe("#removeListener()", function() {
         it("should remove correctly", function() {
-            event.removeListener(listener3);
+            let result = event.removeListener(listener3);
             should(event.listeners).eql([listener1, listener2]);
+            should(result).be.true();
+        });
+
+        it("should not remove", function() {
+            let result = event.removeListener(() => {});
+            should(event.listeners).eql([listener1, listener2]);
+            should(result).be.false();
         });
     });
 

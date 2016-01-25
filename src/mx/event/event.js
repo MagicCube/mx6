@@ -77,11 +77,21 @@ export default class Event
         {
             throw new Error("listener must be a function.");
         }
-        this.listeners.remove(listener);
+
+        const index = this.listeners.indexOf(listener);
+        if (index !== -1)
+        {
+            this.listeners.splice(index, 1);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     clearListeners()
     {
-        this.listeners.clear();
+        this.listeners.splice(0, this.listeners.length);
     }
 }
