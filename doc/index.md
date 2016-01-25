@@ -4,6 +4,7 @@
 - [JavaScript Build-in Objects Extensions](./api/js/build-in-object-extensions.md)
 
 ## Event
+- [mx.Event](./api/mx/event.md)
 
 ## Component
 
