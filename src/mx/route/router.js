@@ -7,6 +7,11 @@ export default class Router
 
     route(pattern, handler = null)
     {
+        if (!pattern)
+        {
+            throw new Error("pattern can not be null or empty.");
+        }
+
         if (handler instanceof Router)
         {
             return this.use(pattern, handler);
@@ -23,6 +28,10 @@ export default class Router
 
     use(pattern, router)
     {
+        if (!pattern)
+        {
+            throw new Error("pattern can not be null or empty.");
+        }
         if (!(router instanceof Router))
         {
             throw new Error("router must be an instance of Router.");
@@ -39,6 +48,15 @@ export default class Router
 
     execute(path, args = {})
     {
+        if (typeof(path) !== "string")
+        {
+            throw new Error("path must be a string.");
+        }
+        if (path[0] !== "/")
+        {
+            throw new Error("path must starts with '/'.");
+        }
+
         if (!args.rawPath)
         {
             args.rawPath = path;

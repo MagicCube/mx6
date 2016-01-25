@@ -59,6 +59,11 @@ export default class Route extends EventProvider
 
     execute(path, p_args = {})
     {
+        if (path[0] !== "/")
+        {
+            throw new Error("path must starts with '/'.");
+        }
+        
         const params = this.extractParams(path);
         const args = jQuery.extend(p_args, {
             path,
