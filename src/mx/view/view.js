@@ -1,4 +1,3 @@
-import $ from "jquery";
 import Component from "../com/component";
 
 export default class View extends Component
@@ -10,7 +9,7 @@ export default class View extends Component
         // Treat children as a READ-ONLY array.
         this._initSubviews();
 
-        this._$element = $("<div>");
+        this._$element = jQuery("<div>");
         this.$element.data("view", this);
 
         this._$container = this.$element;
@@ -26,7 +25,7 @@ export default class View extends Component
     {
         this._subviews.length = Array.prototype.length;
         this._subviews.indexOf = Array.prototype.indexOf;
-        this._subviews.contains = Array.prototype.contains;
+        this._subviews.includes = Array.prototype.includes;
         this._subviews.forEach = Array.prototype.forEach;
         this._subviews.map = Array.prototype.map;
         this._subviews.reduce = Array.prototype.reduce;
@@ -101,7 +100,18 @@ export default class View extends Component
 
     containsSubview(view)
     {
-        return this.subviews.contains(view);
+        if (typeof(view) === "string" || typeof(view) === "number")
+        {
+            view = this.subviews[view];
+        }
+        if (view instanceof View)
+        {
+            return this.subviews.includes(view);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     addSubview(view)
@@ -170,12 +180,10 @@ export default class View extends Component
 
     removeFromParent()
     {
-        if (!this.parent)
+        if (this.parent)
         {
-            throw new Error("parent can not be null.");
+            this.parent.removeSubview(this);
         }
-
-        this.parent.removeSubview(this);
     }
 
     clearSubviews()
@@ -197,7 +205,7 @@ export default class View extends Component
         }
         else
         {
-            $(place).append(this.$element);
+            jQuery(place).append(this.$element);
         }
     }
 

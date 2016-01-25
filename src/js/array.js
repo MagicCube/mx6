@@ -1,3 +1,11 @@
+if (!Array.prototype.includes)
+{
+    Array.prototype.includes = function(item)
+    {
+        return this.indexOf(item) !== -1;
+    }
+}
+
 Array.prototype.add = Array.prototype.push;
 
 Array.prototype.addAll = function(items)

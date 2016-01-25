@@ -6,7 +6,8 @@ class MyEventProvider extends mx.EventProvider
 {
     ontest = null;
 }
-const eventProvider = new MyEventProvider();
+
+let eventProvider = null;
 const results = [];
 const listener1 = e => {
     results.push(1);
@@ -19,6 +20,10 @@ const listener3 = e => {
 };
 
 describe("mx.EventProvider", function() {
+    describe("#constructor()", function() {
+        eventProvider = new MyEventProvider();
+    });
+
     describe("#hasEvent()", function() {
         it("should have 'test' event", function() {
             should(eventProvider.hasEvent("test")).be.true();
@@ -74,7 +79,7 @@ describe("mx.EventProvider", function() {
             eventProvider.on("test", listener2);
             eventProvider.on("test", listener3);
         });
-        
+
         it("should throw error when given a wrong event type", function() {
             should(() => { eventProvider.trigger("abc", () => { }); }).throw(`"abc" event is not found.`);
         });
