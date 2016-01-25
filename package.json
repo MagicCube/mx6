@@ -1,0 +1,27 @@
+{
+  "name": "mx6",
+  "version": "6.0.0",
+  "description": "MXFramework v6, 100% rewritten in ES6.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagicCube/mx6.git"
+  },
+  "keywords": [
+    "es6",
+    "framework",
+    "mxframework",
+    "mx",
+    "mx6",
+    "magiccube"
+  ],
+  "author": "Henry Li <henry1943@163.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MagicCube/mx6/issues"
+  },
+  "homepage": "https://github.com/MagicCube/mx6#readme"
+}
