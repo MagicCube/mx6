@@ -10,4 +10,9 @@ const mx = {
     Route: require("./route/route")
 };
 
+if (typeof(window) !== "undefined")
+{
+    window.mx = mx;
+}
+
 export default mx;

@@ -1,6 +1,6 @@
 import should from "should";
 
-import mx from "../../../src";
+import mx from "../../../src/mx";
 
 const bookRoute = new mx.Route("/book/:publisher/:author/:name");
 

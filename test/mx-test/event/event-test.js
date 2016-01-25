@@ -1,6 +1,6 @@
 import should from "should";
 
-import mx from "../../../src";
+import mx from "../../../src/mx";
 
 describe("mx.Event", function() {
     const source = {};
