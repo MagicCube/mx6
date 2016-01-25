@@ -7,7 +7,8 @@ const mx = {
     Scene: require("./scn/scene"),
     Application: require("./app/application"),
 
-    Route: require("./route/route")
+    Route: require("./route/route"),
+    Router: require("./route/router")
 };
 
 if (typeof(window) !== "undefined")

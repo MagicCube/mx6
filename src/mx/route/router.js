@@ -1,4 +1,5 @@
 import EventProvider from "../event/event-provider"
+import Route from "./route"
 
 export default class Router
 {
@@ -6,13 +7,34 @@ export default class Router
 
     route(pattern, handler = null)
     {
+        if (handler instanceof Router)
+        {
+            return this.use(pattern, handler);
+        }
+
         const route = new Route(pattern);
         if (typeof(handler) === "function")
         {
-            route.addListener(handler);
+            route.on("execute", handler);
         }
         this._routes.push(route);
         return route;
+    }
+
+    use(pattern, router)
+    {
+        if (!(router instanceof Router))
+        {
+            throw new Error("router must be an instance of Router.");
+        }
+
+        return this.route(pattern, context => {
+            const route = context.source;
+            const url = route.toUrl(context.params);
+            const partialUrl = context.path.substr(url.length - 1);
+
+            router.execute(partialUrl, context.args);
+        });
     }
 
     execute(path, args = {})
@@ -32,8 +54,16 @@ export default class Router
 
             path = path.substr(0, path.indexOf("?"));
         }
+        else
+        {
+            if (typeof(args.queryString) === "undefined")
+            {
+                args.queryString = null;
+                args.query = null;
+            }
+        }
 
-        const result = false;
+        let result = false;
         for (let i = 0; i < this._routes.length; i++)
         {
             const route = this._routes[i];

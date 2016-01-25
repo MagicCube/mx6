@@ -69,6 +69,18 @@ export default class Route extends EventProvider
 
 
 
+    toUrl(params)
+    {
+        let path = this.pattern;
+        for (let param in params)
+        {
+            path = path.replace('/:'+param, '/'+params[param]);
+        }
+        path = path.replace(/\/:.*\?/g, '/').replace(/\?/g, '').replace(/\/\*/, '/');
+        return path;
+    }
+
+
 
     static patternToRegex(path, keys, sensitive, strict)
     {
