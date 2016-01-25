@@ -3,6 +3,7 @@ const mx = {
     EventProvider: require("./event/event-provider"),
     Component: require("./com/component"),
     View: require("./view/view"),
+    ViewContainer: require("./view/view-container"),
     Scene: require("./scn/scene"),
     Application: require("./app/application")
 };

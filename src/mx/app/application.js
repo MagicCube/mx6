@@ -1,6 +1,6 @@
-import View from "../view/view";
+import ViewContainer from "../view/view-container";
 
-export default class Application extends View
+export default class Application extends ViewContainer
 {
     constructor(id)
     {

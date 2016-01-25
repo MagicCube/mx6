@@ -1,6 +1,6 @@
-import View from "../view/view";
+import ViewContainer from "../view/view-container";
 
-export default class Scene extends View
+export default class Scene extends ViewContainer
 {
     _path = null;
 

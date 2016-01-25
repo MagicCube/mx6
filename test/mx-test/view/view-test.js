@@ -6,7 +6,7 @@ let rootView = null;
 let childView1 = null;
 let childView2 = null;
 
-class RootView extends mx.View
+class RootView extends mx.ViewContainer
 {
     constructor(id)
     {
@@ -16,7 +16,7 @@ class RootView extends mx.View
     }
 }
 
-describe("mx.View", function() {
+describe("mx.View / mx.ViewContainer", function() {
     describe("#constructor()", function() {
         it("should construct correctly", function() {
             const anonymousView = new mx.View();
@@ -29,7 +29,6 @@ describe("mx.View", function() {
             should(rootView.id).eql("root");
             should(rootView.$element.attr("id")).eql("root");
             should(rootView.$container.attr("id")).eql("container");
-            should(childView1.$container[0]).eql(childView1.$element[0]);
         });
     });
 
