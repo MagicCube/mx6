@@ -7,18 +7,16 @@ export default class HashRouter extends Router
     constructor()
     {
         super();
-        if (typeof(jQuery) !== "undefined")
-        {
-            jQuery(window).on("hashchange", () => {
+
+        jQuery(window).on("hashchange", () => {
+            this._onhashchange();
+        });
+
+        jQuery(window).on("load", () => {
+            setTimeout(() => {
                 this._onhashchange();
             });
-
-            jQuery(window).on("load", () => {
-                setTimeout(() => {
-                    this._onhashchange();
-                });
-            })
-        }
+        });
     }
 
 
