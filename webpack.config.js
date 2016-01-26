@@ -44,7 +44,7 @@ module.exports = {
     output: {
         // webpack-dev-server will server output.path as output.publicPath
         path: path.join(__dirname, "./dist"),
-        publicPath: "/",
+        publicPath: "/dist/",
         filename: "[name].js",
         chunkFilename: "[id]/[id].js"
     },

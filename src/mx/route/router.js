@@ -41,7 +41,6 @@ export default class Router
             const route = context.source;
             const url = route.toUrl(context.params);
             const partialUrl = context.path.substr(url.length - 1);
-
             router.execute(partialUrl, context.args);
         });
     }
@@ -63,14 +62,10 @@ export default class Router
         }
         if (path.indexOf("?") !== -1)
         {
-            const queryString = path.substr(path.indexOf("?") + 1);
-            args.queryString = queryString;
-            args.query = queryString ? JSON.parse('{"' + queryString.replace(/&/g, '","').replace(/\=/g, '":"') + '"}', function(key, value)
-            {
-                return key === "" ? value : decodeURIComponent(value);
-            }) : {};
-
-            path = path.substr(0, path.indexOf("?"));
+            const pathObj = this.parsePath(path);
+            args.queryString = pathObj.queryString;
+            args.query = pathObj.query;
+            path = pathObj.path;
         }
         else
         {
@@ -87,10 +82,29 @@ export default class Router
             const route = this._routes[i];
             if (route.match(path))
             {
-                route.execute(path, args);
-                result = true;
+                if (route.execute(path, args))
+                {
+                    result = true;
+                }
             }
         }
         return result;
+    }
+
+
+    parsePath(rawPath)
+    {
+        const queryString = rawPath.substr(rawPath.indexOf("?") + 1);
+        const query = queryString ? JSON.parse('{"' + queryString.replace(/&/g, '","').replace(/\=/g, '":"') + '"}', function(key, value)
+        {
+            return key === "" ? value : decodeURIComponent(value);
+        }) : {};
+        const path = rawPath.substr(0, rawPath.indexOf("?"));
+        return {
+            rawPath,
+            path,
+            queryString,
+            query
+        };
     }
 }

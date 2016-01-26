@@ -1,10 +1,56 @@
 <html>
     <head>
         <title></title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <script src="http://cdn.bootcss.com/jquery/2.2.0/jquery.js"></script>
         <script src="../dist/mx.js"></script>
+        <style>
+        li
+        {
+            a
+            {
+                text-decoration: none;
+            }
+        }
+        li.active
+        {
+            background: red;
+            color: white;
+        }
+        </style>
     </head>
     <body>
-        
+        <ul>
+            <li id="home"><a href="#/">首页</a></li>
+            <li id="baidu"><a href="#/link/baidu">百度</a></li>
+            <li id="taobao"><a href="#/link/taobao">淘宝</a></li>
+            <li id="neteast"><a href="#/link/neteast">网易</a></li>
+        </ul>
+        <script>
+        mx.route("/", function() {
+            console.log("Switched to /");
+            $(".active").removeClass("active");
+            $("#home").addClass("active");
+        });
+
+        const linkRouter = new mx.Router();
+        linkRouter.route("/baidu", () => {
+            console.log("Switched to Baidu");
+            $(".active").removeClass("active");
+            $("#baidu").addClass("active");
+        });
+        linkRouter.route("/taobao", () => {
+            console.log("Switched to Taobao");
+            $(".active").removeClass("active");
+            $("#taobao").addClass("active");
+        });
+        linkRouter.route("/neteast", () => {
+            console.log("Switched to Neteast");
+            $(".active").removeClass("active");
+            $("#neteast").addClass("active");
+        });
+
+        mx.route("/link/*", linkRouter);
+        </script>
     </body>
 </html>

@@ -8,8 +8,13 @@ const mx = {
     Application: require("./app/application"),
 
     Route: require("./route/route"),
-    Router: require("./route/router")
+    Router: require("./route/router"),
+    HashRouter: require("./route/hash-router")
 };
+
+mx.router = new mx.HashRouter();
+mx.route = mx.router.route.bind(mx.router);
+mx.goto = mx.router.goto.bind(mx.router);
 
 if (typeof(window) !== "undefined")
 {
