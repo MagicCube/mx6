@@ -1,13 +1,13 @@
 {
   "name": "mx6",
-  "version": "6.0.0",
+  "version": "6.0.6",
   "description": "MXFramework v6, 100% rewritten in ES6.",
   "main": "./dist/mx.js",
   "engines": {
     "node": "4.2.1"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register --timeout 10000"
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
