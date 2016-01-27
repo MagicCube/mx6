@@ -14,7 +14,11 @@ const path = require("path");
 const webpack = require("webpack");
 
 // NOTE: All the paths defined in plugins are related to output.path.
-const plugins = [];
+const plugins = [
+    new webpack.ProvidePlugin({
+        "mx": "./src/mx"
+    })
+];
 
 if (!devMode)
 {
@@ -46,7 +50,9 @@ module.exports = {
         path: path.join(__dirname, "./dist"),
         publicPath: "/dist/",
         filename: "[name].js",
-        chunkFilename: "[id]/[id].js"
+        chunkFilename: "[id]/[id].js",
+        libraryTarget: devMode ? "var" : "commonjs",
+        library: "mx"
     },
     module: {
         loaders: [
