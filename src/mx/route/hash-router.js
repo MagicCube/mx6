@@ -70,7 +70,7 @@ export default class HashRouter extends Router
         let queryStrings = [];
         for (let key in query)
         {
-            queryStrings.push(key + "=" + query[key]);
+            queryStrings.push(key + "=" + encodeURIComponent(query[key]));
         }
         if (queryStrings.length)
         {
