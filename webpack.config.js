@@ -13,12 +13,6 @@ const path = require("path");
 
 const webpack = require("webpack");
 
-// NOTE: All the paths defined in plugins are related to output.path.
-const plugins = [
-    new webpack.ProvidePlugin({
-        "mx": "./src/mx"
-    })
-];
 
 if (!devMode)
 {
