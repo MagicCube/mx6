@@ -38,22 +38,34 @@ if (!devMode)
 }
 
 
-module.exports = {
+
+const output = {
+    // webpack-dev-server will server output.path as output.publicPath
+    path: path.join(__dirname, "./dist"),
+    publicPath: "/dist/",
+    filename: "[name].js",
+    chunkFilename: "[id]/[id].js"
+};
+
+if (devMode)
+{
+    output.libraryTarget = "var";
+    output.library = "mx";
+}
+else
+{
+    output.libraryTarget = "commonjs";
+}
+
+
+const config = {
     // This is the root of client source codes.
     context: path.join(__dirname, "./"),
     entry: {
         mx: "./src/mx",
         injection: "./src/js"
     },
-    output: {
-        // webpack-dev-server will server output.path as output.publicPath
-        path: path.join(__dirname, "./dist"),
-        publicPath: "/dist/",
-        filename: "[name].js",
-        chunkFilename: "[id]/[id].js",
-        libraryTarget: devMode ? "var" : "commonjs",
-        library: "mx"
-    },
+    output,
     module: {
         loaders: [
             {
@@ -65,3 +77,6 @@ module.exports = {
     },
     plugins: plugins
 };
+config.target = devMode ? "web" : "node";
+
+module.exports = config;
