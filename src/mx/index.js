@@ -16,9 +16,4 @@ mx.router = new mx.HashRouter();
 mx.route = mx.router.route.bind(mx.router);
 mx.goto = mx.router.goto.bind(mx.router);
 
-if (typeof(window) !== "undefined")
-{
-    window.mx = mx;
-}
-
 export default mx;
