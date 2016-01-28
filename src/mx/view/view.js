@@ -104,6 +104,10 @@ export default class View extends Component
             {
                 jQuery.extend(this._frame, frame);
             }
+            else
+            {
+                this._frame = frame;
+            }
         }
 
 
